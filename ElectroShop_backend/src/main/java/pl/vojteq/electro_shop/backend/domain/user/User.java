@@ -1,9 +1,12 @@
 package pl.vojteq.electro_shop.backend.domain.user;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -19,14 +22,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
+//    @NotNull
     private String userName;
 
     private String firstName;
 
     private String lastName;
 
-    @NotNull
+//    @NotNull
+    @Email
     private String email;
 
 //    @NotNull
@@ -35,6 +39,7 @@ public class User {
 //    @NotNull
 //    private String password;
 
+    @Nullable
     @Embedded
     private Address address;
 
@@ -42,5 +47,58 @@ public class User {
     public User(String userName, String email) {
         this.userName = userName;
         this.email = email;
+    }
+
+//    public User(@NotNull String userName, String firstName, String lastName, @NotNull String email, Address address) {
+//        this.userName = userName;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.address = address;
+//    }
+
+    public User(String userName, String firstName, String lastName, String email, Address address) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+    }
+
+    public User(String userName, String firstName, String lastName, String email) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                userName.equals(user.userName) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                email.equals(user.email) &&
+                Objects.equals(address, user.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userName, firstName, lastName, email, address);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                '}';
     }
 }

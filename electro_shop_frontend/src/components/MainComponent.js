@@ -1,13 +1,14 @@
-import {Component} from "react/cjs/react.production.min";
+import {Component} from "react";
 import {Navbar, NavbarBrand}from 'reactstrap'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Products from './ProductsComponent'
-import {PRODUCTS} from "../shared";
+import {PRODUCTS} from "../shared/products";
 import ProductDetails from "./ProductDetailsComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
+import Contact from "./ContactComponent";
 
 class Main extends Component {
     constructor(props) {
@@ -42,6 +43,7 @@ class Main extends Component {
                 <Switch>
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/products" component={() => <Products products={this.state.products} />} />
+                    <Route exact path="/contactus" component={() => <Contact />} />
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />

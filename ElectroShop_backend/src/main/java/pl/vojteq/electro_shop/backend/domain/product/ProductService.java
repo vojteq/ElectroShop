@@ -27,13 +27,13 @@ public class ProductService {
         return productRepository.findBySubcategory(subcategory);
     }
 
-    public List<Product> findBySubcategoryOrderedByName(Subcategory subcategory) {
-        return productRepository.findBySubcategoryNameOrderByName(subcategory);
-    }
-
-    public List<Product> findByCategory(Category category) {
-        return productRepository.findBySubcategoryWithin(category.getSubcategories());
-    }
+//    public List<Product> findBySubcategoryOrderedByName(Subcategory subcategory) {
+//        return productRepository.findBySubcategoryNameOrderByName(subcategory);
+//    }
+//
+//    public List<Product> findByCategory(Category category) {
+//        return productRepository.findBySubcategoryWithin(category.getSubcategories());
+//    }
 
     public Product createOrUpdateProduct(Product product) {
         return productRepository.save(product);

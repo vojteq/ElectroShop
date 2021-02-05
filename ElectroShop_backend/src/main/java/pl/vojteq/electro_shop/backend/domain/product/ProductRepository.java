@@ -10,9 +10,9 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     List<Product> findBySubcategory(Subcategory subcategory);
 
-    List<Product> findBySubcategoryWithin(List<Subcategory> subcategories);
-
-    List<Product> findBySubcategoryNameOrderByName(Subcategory subcategory);
+//    List<Product> findBySubcategoryWithin(List<Subcategory> subcategories);
+//
+//    List<Product> findBySubcategoryNameOrderByName(Subcategory subcategory);
 
     void deleteById(UUID uuid);
 }

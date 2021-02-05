@@ -1,102 +1,73 @@
 package pl.vojteq.electro_shop.backend.api.user;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
-import pl.vojteq.electro_shop.backend.common.exception.NotFoundException;
-import pl.vojteq.electro_shop.backend.domain.user.Address;
 import pl.vojteq.electro_shop.backend.domain.user.User;
 import pl.vojteq.electro_shop.backend.domain.user.UserService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
-@RequestMapping("/users")
-@RequiredArgsConstructor
+//@RequestMapping("/users")
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping
-    public List<UserResponse> findAll() {
-        return userService.findAll()
+    private final UserModelAssembler userModelAssembler;
+
+
+    @GetMapping("/users")
+    CollectionModel<EntityModel<User>> getAllUsers() {
+//        List<User> users = userService.findAll();
+//        return userModelAssembler.toCollectionModel(users);
+
+        List<EntityModel<User>> users = userService.findAll()
                 .stream()
-                .map(UserResponse::fromUser)
+                .map(userModelAssembler::toModel)
                 .collect(Collectors.toList());
+
+        return CollectionModel.of(
+                users,
+                linkTo(methodOn(UserController.class).getAllUsers()).withSelfRel()
+        );
     }
 
-    @GetMapping("/{id}")
-    public UserResponse findById(@PathVariable UUID id) {
-        final User user = userService
+    @GetMapping("users/{id}")
+    EntityModel<User> getUser(@PathVariable UUID id) {
+        User user = userService.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        return userModelAssembler.toModel(user);
+    }
+
+    @PostMapping("/users")
+    User createUser(@RequestBody User user) {
+        return userService.createOrUpdateUser(user);
+    }
+
+    @PostMapping("users/{id}")
+    User updateUser(@RequestBody User newUser, @PathVariable UUID id) {
+        return userService
                 .findById(id)
-                .orElseThrow(() -> new NotFoundException("User with id <" + id + "> does not exist"));
-
-        return UserResponse.fromUser(user);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse createUser(@RequestBody @Valid CreateUserRequest request) {
-        final User user = userService.createOrUpdateUser(request.toUser());
-
-        return UserResponse.fromUser(user);
-    }
-
-    //todo
-
-    @Data
-    @Builder
-    static class UserResponse {
-
-        private UUID id;
-        private String userName;
-        private String firstName;
-        private String lastName;
-        private String email;
-        private Address address;
-
-        static UserResponse fromUser(User user) {
-            return UserResponse.builder()
-                    .id(user.getId())
-                    .userName(user.getUserName())
-                    .firstName(user.getFirstName())
-                    .lastName(user.getLastName())
-                    .email(user.getEmail())
-                    .address(user.getAddress())
-                    .build();
-        }
-    }
-
-    @Data
-    static class CreateUserRequest {
-
-        @NotNull
-        private String userName;
-
-        @NotNull
-        private String email;
-
-
-        User toUser() {
-            return new User(userName, email);
-        }
-    }
-
-    @Data
-    static class UpdateUserRequest {
-
-        @NotNull
-        private String userName;
-
-        @NotNull
-        @Pattern(regexp = ".*@.*")
-        private String email;
+                .map(user -> {
+                    user.setUserName(newUser.getUserName());
+                    user.setFirstName(newUser.getFirstName());
+                    user.setLastName(newUser.getLastName());
+                    user.setEmail(newUser.getEmail());
+                    user.setAddress(newUser.getAddress());
+                    return userService.createOrUpdateUser(user);
+                })
+                .orElseGet(() -> {
+                    newUser.setId(id);
+                    return userService.createOrUpdateUser(newUser);
+                });
     }
 }

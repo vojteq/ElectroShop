@@ -6,6 +6,7 @@ import pl.vojteq.electro_shop.backend.domain.category.Subcategory;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -21,11 +22,55 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
+//    @NotNull
     private String name;
 
     @ManyToOne
     private Subcategory subcategory;
 
     private String description;
+
+//    public Product(@NotNull String name) {
+//        this.name = name;
+//    }
+//
+//    public Product(@NotNull String name, String description) {
+//        this.name = name;
+//        this.description = description;
+//    }
+
+    public Product(String name) {
+        this.name = name;
+    }
+
+    public Product(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) &&
+                name.equals(product.name) &&
+                Objects.equals(subcategory, product.subcategory) &&
+                Objects.equals(description, product.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, subcategory, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", subcategory=" + subcategory +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

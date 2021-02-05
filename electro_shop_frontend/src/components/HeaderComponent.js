@@ -1,6 +1,7 @@
 import React from 'react';
-import {Jumbotron, Navbar, NavbarBrand, NavbarToggler} from "reactstrap";
-import {Component} from 'react';
+import {Collapse, Jumbotron, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
+import {Component} from "react";
+// import {Component} from 'react';
 
 class Header extends Component {
 
@@ -9,7 +10,7 @@ class Header extends Component {
 
         this.toggleNav = this.toggleNav.bind(this);
         this.state = {
-            isNavOpen: false;
+            isNavOpen: false
         };
     }
 
@@ -24,29 +25,46 @@ class Header extends Component {
                 <div>
                     <Navbar dark expand="md">
                         <div className="container">
-                            <NavbarToggler onClick={this.toggleNav()} />
-                            {/*<NavbarBrand className="mr-auto" href = */}
+                            <NavbarToggler onClick={this.toggleNav} />
+                            <NavbarBrand className="mr-auto" href = "/">
+                                <img src="assets/images/logo.png" height="30" width="41" alt="ElectroShop" />
+                            </NavbarBrand>
+                            <Collapse isOpen={this.state.isNavOpen} navbar>
+                                <Nav navbar>
+                                    <NavItem>
+                                        <NavLink className="nav-link" to="/home">
+                                            <span className="fa fa-home fa-lg" /> Home
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink className="nav-link" to="/aboutus">
+                                            <span className="fa fa-info fa-lg" /> About
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink className="nav-link" to="/products">
+                                            <span className="fa fa-list fa-lg" /> Products
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink className="nav-link" to="/contactus">
+                                            <span className="fa fa-address-card fa-lg" /> Contact Us
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                            </Collapse>
                         </div>
                     </Navbar>
-
-
-                    <React.Fragment>
-                        <Navbar dark>
-                            <div className="container">
-                                <NavbarBrand href="/">ElectroShop</NavbarBrand>
-                            </div>
-                        </Navbar>
-                        <Jumbotron>
-                            <div className="container">
-                                <div className="row row-header">
-                                    <div className="col-12 col-sm-6">
-                                        <h1>ElectroShop</h1>
-                                        <p>Newest shop at the market</p>
-                                    </div>
+                    <Jumbotron>
+                        <div className="container">
+                            <div className="row row-header">
+                                <div className="col-12 col-sm-6">
+                                    <h1>ElectroShop</h1>
+                                    <p>Newest shop at the market</p>
                                 </div>
                             </div>
-                        </Jumbotron>
-                    </React.Fragment>
+                        </div>
+                    </Jumbotron>
                 </div>
         );
     }

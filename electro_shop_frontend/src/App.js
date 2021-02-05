@@ -4,7 +4,7 @@ import { Component } from 'react/cjs/react.production.min';
 import { BrowserRouter } from 'react-router-dom';
 import {Navbar, NavbarBrand} from "reactstrap";
 import Products from "./components/ProductsComponent";
-import {PRODUCTS} from "./shared";
+import {PRODUCTS} from "./shared/products";
 import Main from "./components/MainComponent";
 
 class App extends Component {

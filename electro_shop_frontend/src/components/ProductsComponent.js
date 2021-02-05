@@ -60,9 +60,9 @@ import ProductDetails from "./ProductDetailsComponent";
 //     }
 // }
 
-function RenderProduct({product, onClick}) {
+function RenderProduct({product}) {
     return (
-        <Card onClick={() => onClick(product.id)}>
+        <Card>
             <CardImg width="100%" src={product.image} alt={product.name} />
             <CardImgOverlay>
                 {product.name}
@@ -75,7 +75,7 @@ const Products = (props) => {
     const products = props.products.map((product) => {
         return (
             <div className="col-12 col-md-5 m-1">
-                <RenderProduct product={product} onClick={props.onClick} />
+                <RenderProduct product={product}/>
             </div>
         );
     });
