@@ -1,8 +1,26 @@
 import React from 'react';
+import {Breadcrumb, BreadcrumbItem} from "reactstrap";
+import {Link} from "react-router-dom";
 
 function Contact(props) {
     return (
         <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem>
+                        <Link to="/home">
+                            Home
+                        </Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>
+                        Contact Us
+                    </BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>Contact Us</h3>
+                    <hr/>
+                </div>
+            </div>
             <div className="row row-content">
                 <div className="col-12">
                     <h3>Location Information</h3>
@@ -14,7 +32,8 @@ function Contact(props) {
                         Cracow, LesserPoland<br/>
                         Poland<br/>
                         <i className="fa fa-phone"/>: +48 123 123 123<br/>
-                        <i className="fa-envelope" />: <a href="mailto:electroShop@gmail.com">electroShop@gmail.com</a><br/>
+                        <i className="fa-envelope"/>: <a
+                        href="mailto:electroShop@gmail.com">electroShop@gmail.com</a><br/>
                     </address>
                 </div>
                 <div className="col-12 col-sm-6 offset-sm-1">

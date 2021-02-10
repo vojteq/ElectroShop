@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {Card, CardBody, CardImg, CardText, CardTitle} from 'reactstrap'
+import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle} from 'reactstrap'
+import {Link} from "react-router-dom";
 
 function RenderProduct({product}) {
     return (
@@ -43,7 +44,7 @@ function RenderComments({commentsArray}) {
     }
     else {
         return (
-            <div></div>
+            <div>No Comments</div>
         );
     }
 }
@@ -54,11 +55,28 @@ const ProductDetails = (props) => {
         return (
             <div className="container">
                 <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to="/products">
+                                Products
+                            </Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>
+                            {product.name}
+                        </BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{product.name}</h3>
+                        <hr />
+                    </div>
+                </div>
+
+                <div className="row">
                     <div className="col-12 col-md-5 m-1">
                         <RenderProduct product={product} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments commentsArray={product.comments} />
+                        <RenderComments commentsArray={props.comments} />
                     </div>
                 </div>
             </div>
@@ -66,7 +84,7 @@ const ProductDetails = (props) => {
     }
     else {
         return (
-            <div></div>
+            <div>ERROR</div>
         );
     }
 }

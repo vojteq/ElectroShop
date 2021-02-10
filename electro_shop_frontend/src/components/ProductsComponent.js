@@ -1,72 +1,27 @@
-import React, { Component } from 'react';
-import {Card, CardBody, CardImg, CardImgOverlay, CardText, CardTitle, Media} from "reactstrap";
-import ProductDetails from "./ProductDetailsComponent";
+import React, {Component} from 'react';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    Card,
+    CardBody, CardHeader,
+    CardImg,
+    CardImgOverlay,
+    CardText,
+    CardTitle,
+    Media
+} from "reactstrap";
+import {Link} from "react-router-dom";
 
-// class Products extends Component {
-//
-//     constructor(props) {
-//         super(props);
-//
-//         this.state = {
-//             selectedProduct: null
-//         }
-//     }
-//
-//     onProductSelect(product) {
-//         this.setState({
-//             selectedProduct: product
-//         });
-//     }
-//
-//     renderProduct(product) {
-//         if (product != null) {
-//             return (
-//                 <ProductDetails selectedProduct={this.state.selectedProduct} />
-//             );
-//         }
-//         else {
-//             return (
-//                 <div></div>
-//             );
-//         }
-//     }
-//
-//     render() {
-//         const products = this.props.products.map((product) => {
-//             return (
-//                 <div className="col-12 col-md-5 m-1">
-//                     <Card key={product.id} onClick={() => this.props.onClick(product.id)}>
-//                         <CardImg width="100%" src={product.image} alt={product.name} />
-//                         <CardImgOverlay body className="ml-5">
-//                             <CardTitle>
-//                                 {product.name}
-//                             </CardTitle>
-//                         </CardImgOverlay>
-//                     </Card>
-//                 </div>
-//             );
-//         });
-//
-//         return (
-//             <div className="container">
-//                 <div className="row">
-//                     {products}
-//                 </div>
-//                 <div>
-//                     {this.renderProduct(this.state.selectedProduct)}
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
 
-function RenderProduct({product}) {
+function RenderProduct({product, onClick}) {
     return (
         <Card>
-            <CardImg width="100%" src={product.image} alt={product.name} />
-            <CardImgOverlay>
-                {product.name}
-            </CardImgOverlay>
+            <Link to={`/products/${product.id}`}>
+                <CardImg width="100%" src={product.image} alt={product.name}/>
+                <CardHeader>
+                    {product.name}
+                </CardHeader>
+            </Link>
         </Card>
     );
 }
@@ -82,6 +37,18 @@ const Products = (props) => {
 
     return (
         <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem>
+                        <Link to="/home">
+                            Home
+                        </Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>
+                        Products
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </div>
             <div className="row">
                 {products}
             </div>

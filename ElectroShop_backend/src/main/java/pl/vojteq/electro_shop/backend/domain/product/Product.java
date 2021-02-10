@@ -1,6 +1,7 @@
 package pl.vojteq.electro_shop.backend.domain.product;
 
 import lombok.*;
+import org.hibernate.type.BlobType;
 import pl.vojteq.electro_shop.backend.domain.category.Category;
 import pl.vojteq.electro_shop.backend.domain.category.Subcategory;
 
@@ -26,9 +27,14 @@ public class Product {
     private String name;
 
     @ManyToOne
+    private Category category;
+
+    @ManyToOne
     private Subcategory subcategory;
 
     private String description;
+
+//    private BlobType
 
 //    public Product(@NotNull String name) {
 //        this.name = name;

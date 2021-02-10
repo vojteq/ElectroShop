@@ -6,6 +6,7 @@ export const PRODUCTS = [
         category: 'graphic card',
         label: 'Hot',
         price: '1000.00',
+        featured: true,
         description: 'karta graficzna RTX 3090 :>',
         comments: [
             {
@@ -24,6 +25,7 @@ export const PRODUCTS = [
         category: 'processor',
         label: '',
         price: '100.00',
+        featured: false,
         description: 'procesor i5 10300f',
         comments: [
             {
@@ -42,6 +44,7 @@ export const PRODUCTS = [
         category: 'ram',
         label: 'new',
         price: '1000.00',
+        featured: false,
         description: 'pamieci RAM',
         comments: [
             {
@@ -60,6 +63,7 @@ export const PRODUCTS = [
         category: 'motherboard',
         label: 'Hot',
         price: '1000.00',
+        featured: false,
         description: 'plyta glowna asus',
         comments: [
             {
