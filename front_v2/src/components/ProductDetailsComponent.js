@@ -31,8 +31,9 @@ function RenderProduct({product}) {
 }
 
 const required = (val) => val && val.length;
-const minLength = (len) => (val) => val && val.length >= len
-const maxLength = (len) => (val) => val && val.length <= len
+const minLength = (len) => (val) => val && val.length >= len;
+const maxLength = (len) => (val) => val && val.length <= len;
+const isValidRate = (val) => !isNaN(parseInt(val));
 
 class CommentForm extends Component {
 
@@ -55,7 +56,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleCommentFormModal();
-        this.props.postComment(this.props.productId, values.rating, values.name, values.comment);
+        this.props.addComment(this.props.productId, values.rating, values.name, values.comment);
     }
 
     render() {
@@ -85,13 +86,25 @@ class CommentForm extends Component {
                                         name="rating"
                                         id="rating"
                                         className="form-control"
+                                        validators={{
+                                            isValidRate: isValidRate
+                                        }}
                                     >
+                                        <option/>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
                                         <option>5</option>
                                     </Control.select>
+                                    <Errors
+                                        model=".rating"
+                                        className="text-danger"
+                                        show="touched"
+                                        messages={{
+                                            isValidRate: "Choose your rate"
+                                        }}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="form-group" row>
@@ -155,18 +168,20 @@ function RenderComments({comments}) {
         return (
             comments.map((comment) => {
                     return (
-                        <li key={comment.id}>
-                            <p>
-                                {comment.comment}
-                            </p>
-                            <p>
-                                {new Intl.DateTimeFormat('en-US', {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: '2-digit'
-                                }).format(new Date(Date.parse(comment.date)))}
-                            </p>
-                        </li>
+                        <ul className="list-unstyled">
+                            <li key={comment.id}>
+                                <p>
+                                    {comment.comment}
+                                </p>
+                                <p>
+                                    {new Intl.DateTimeFormat('en-US', {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: '2-digit'
+                                    }).format(new Date(Date.parse(comment.date)))}
+                                </p>
+                            </li>
+                        </ul>
                     );
                 }
             ));
@@ -206,10 +221,15 @@ const ProductDetails = (props) => {
                         <RenderProduct product={product}/>
                     </div>
                     <div className="col-12 col-md-5 m-1 white-font">
-                        <CommentForm/>
-                        <div className="list-unstyled">
-                            <RenderComments comments={props.comments}/>
-                        </div>
+                        <CommentForm
+                            productId={product.id}
+                            addComment={props.addComment}
+                        />
+                        <RenderComments
+                            comments={props.comments}
+                            addComment={props.addComment}
+                            productId={props.product.id}
+                        />
                     </div>
                 </div>
             </div>
