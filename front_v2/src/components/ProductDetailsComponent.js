@@ -13,11 +13,13 @@ import {
 } from "reactstrap";
 import {Link} from "react-router-dom";
 import {Control, Errors, LocalForm} from "react-redux-form";
+import {Loading} from "./LoadingComponent";
+import {baseUrl} from "../shared/baseUrl";
 
 function RenderProduct({product}) {
     return (
         <Card>
-            <CardImg top src={product.image} alt={product.name}/>
+            <CardImg top src={baseUrl + product.image} alt={product.name}/>
             <CardBody>
                 <CardTitle>
                     {product.name}
@@ -56,7 +58,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleCommentFormModal();
-        this.props.addComment(this.props.productId, values.rating, values.name, values.comment);
+        this.props.postComment(this.props.productId, values.rating, values.name, values.comment);
     }
 
     render() {
@@ -193,8 +195,27 @@ function RenderComments({comments}) {
 }
 
 const ProductDetails = (props) => {
-    let product = props.product;
-    if (product != null) {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading/>
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.product != null) {
+        let product = props.product;
+
         return (
             <div className="container">
                 <div className="row white-font">
@@ -223,11 +244,11 @@ const ProductDetails = (props) => {
                     <div className="col-12 col-md-5 m-1 white-font">
                         <CommentForm
                             productId={product.id}
-                            addComment={props.addComment}
+                            postComment={props.postComment}
                         />
                         <RenderComments
                             comments={props.comments}
-                            addComment={props.addComment}
+                            postComment={props.postComment}
                             productId={props.product.id}
                         />
                     </div>
