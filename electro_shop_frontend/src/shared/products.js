@@ -1,78 +1,43 @@
-export const PRODUCTS = [
-    {
-        id: 0,
-        name: 'RTX 3090',
-        image: 'assets/images/uthappizza.png',
-        category: 'graphic card',
-        label: 'Hot',
-        price: '1000.00',
-        featured: true,
-        description: 'karta graficzna RTX 3090 :>',
-        comments: [
-            {
-                id: 0,
-                rating: 5,
-                comment: 'best card ive ever had',
-                author: 'user1',
-                date: "2012-10-16T17:57:28.556094Z"
-            }
-        ]
-    },
-    {
-        id: 1,
-        name: 'I5 10300f',
-        image: 'assets/images/alberto.png',
-        category: 'processor',
-        label: '',
-        price: '100.00',
-        featured: false,
-        description: 'procesor i5 10300f',
-        comments: [
-            {
-                id: 0,
-                rating: 4,
-                comment: 'some decent processor',
-                author: 'user2',
-                date: "2012-10-16T17:57:28.556094Z"
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'RAM DDR5',
-        image: 'assets/images/vadonut.png',
-        category: 'ram',
-        label: 'new',
-        price: '1000.00',
-        featured: false,
-        description: 'pamieci RAM',
-        comments: [
-            {
-                id: 0,
-                rating: 5,
-                comment: 'newest ram',
-                author: 'user3',
-                date: "2012-10-16T17:57:28.556094Z"
-            }
-        ]
-    },
-    {
-        id: 3,
-        name: 'z490',
-        image: 'assets/images/buffet.png',
-        category: 'motherboard',
-        label: 'Hot',
-        price: '1000.00',
-        featured: false,
-        description: 'plyta glowna asus',
-        comments: [
-            {
-                id: 0,
-                rating: 5,
-                comment: 'best for gaming',
-                author: 'user4',
-                date: "2012-10-16T17:57:28.556094Z"
-            }
-        ]
-    }
-];
+export const PRODUCTS =
+    [
+        {
+            id: 0,
+            name:'Uthappizza',
+            image: '/assets/images/uthappizza.png',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            featured: true,
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
+        },
+        {
+            id: 1,
+            name:'Zucchipakoda',
+            image: '/assets/images/zucchipakoda.png',
+            category: 'appetizer',
+            label:'',
+            price:'1.99',
+            featured: false,
+            description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
+        },
+        {
+            id: 2,
+            name:'Vadonut',
+            image: '/assets/images/vadonut.png',
+            category: 'appetizer',
+            label:'New',
+            price:'1.99',
+            featured: false,
+            description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
+        },
+        {
+            id: 3,
+            name:'ElaiCheese Cake',
+            image: '/assets/images/elaicheesecake.png',
+            category: 'dessert',
+            label:'',
+            price:'2.99',
+            featured: false,
+            description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
+        }
+    ];

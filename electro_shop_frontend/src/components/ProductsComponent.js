@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
 import {
     Breadcrumb,
     BreadcrumbItem,
     Card,
-    CardBody, CardHeader,
+    CardBody,
     CardImg,
     CardImgOverlay,
     CardText,
@@ -11,29 +10,53 @@ import {
     Media
 } from "reactstrap";
 import {Link} from "react-router-dom";
+import {Loading} from "./LoadingComponent";
+import {baseUrl} from "../shared/baseUrl";
 
-
-function RenderProduct({product, onClick}) {
+function RenderProduct({product}) {
     return (
         <Card>
             <Link to={`/products/${product.id}`}>
-                <CardImg width="100%" src={product.image} alt={product.name}/>
-                <CardHeader>
-                    {product.name}
-                </CardHeader>
+                <CardImg width="100%" src={baseUrl + product.image} alt={product.name}/>
+                <CardImgOverlay>
+                    <CardTitle>
+                        {product.name}
+                    </CardTitle>
+                </CardImgOverlay>
             </Link>
         </Card>
     );
 }
 
 const Products = (props) => {
-    const products = props.products.map((product) => {
+    const renderProducts = props.products.products.map((product) => {
         return (
-            <div className="col-12 col-md-5 m-1">
-                <RenderProduct product={product}/>
+            <div className="col-12 col-md-5 m-1" key={product.id}>
+                {/*todo usunac onclicka?*/}
+                <RenderProduct product={product} onClick={props.onClick}/>
             </div>
         );
     });
+
+    const Products = () => {
+        if (props.products.isLoading) {
+            return (
+                <Loading/>
+            );
+        }
+        else if (props.products.errMess) {
+            return (
+                <h4>{props.products.errMess}</h4>
+            );
+        }
+        else {
+            return (
+                <>
+                {renderProducts}
+                </>
+            );
+        }
+    }
 
     return (
         <div className="container">
@@ -48,9 +71,13 @@ const Products = (props) => {
                         Products
                     </BreadcrumbItem>
                 </Breadcrumb>
+                <div className="col-12">
+                    <h3>Products</h3>
+                    <hr/>
+                </div>
             </div>
             <div className="row">
-                {products}
+                <Products/>
             </div>
         </div>
     );

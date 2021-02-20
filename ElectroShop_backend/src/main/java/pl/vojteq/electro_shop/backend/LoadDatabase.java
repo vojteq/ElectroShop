@@ -11,6 +11,9 @@ import pl.vojteq.electro_shop.backend.domain.user.Address;
 import pl.vojteq.electro_shop.backend.domain.user.User;
 import pl.vojteq.electro_shop.backend.domain.user.UserRepository;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 @Configuration
 public class LoadDatabase {
 
@@ -34,8 +37,14 @@ public class LoadDatabase {
             userRepository.findAll().forEach(user -> logger.info("Preloading user: " + user));
 
 
-            productRepository.save(new Product("processor"));
-            productRepository.save(new Product("graphic card", "high end graphic card"));
+            File file = new File("/pictures/gpu.jpg");
+            System.out.println("file size: " + file.length());
+            byte[] picture = new byte[(int) file.length()];
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(picture);
+            fileInputStream.close();
+            productRepository.save(new Product("processor", "some processor", picture));
+            productRepository.save(new Product("graphic card", "high end graphic card", picture));
             productRepository.findAll().forEach(product -> logger.info("Preloading product: " + product));
         };
     }

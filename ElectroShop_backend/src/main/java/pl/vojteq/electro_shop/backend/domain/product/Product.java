@@ -34,16 +34,8 @@ public class Product {
 
     private String description;
 
-//    private BlobType
-
-//    public Product(@NotNull String name) {
-//        this.name = name;
-//    }
-//
-//    public Product(@NotNull String name, String description) {
-//        this.name = name;
-//        this.description = description;
-//    }
+    @Lob
+    private byte[] picture;
 
     public Product(String name) {
         this.name = name;
@@ -52,6 +44,12 @@ public class Product {
     public Product(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Product(String name, String description, byte[] picture) {
+        this.name = name;
+        this.description = description;
+        this.picture = picture;
     }
 
     @Override

@@ -1,13 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import {Component} from 'react/cjs/react.production.min';
-import {BrowserRouter} from 'react-router-dom';
-import {Navbar, NavbarBrand} from "reactstrap";
-import Products from "./components/ProductsComponent";
-import {PRODUCTS} from "./shared/products";
+import {Component} from "react/cjs/react.production.min";
 import Main from "./components/MainComponent";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 import {ConfigureStore} from "./redux/configureStore";
-import {Provider} from 'react-redux'
 
 const store = ConfigureStore();
 
@@ -15,6 +11,9 @@ class App extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            // products: PRODUCTS
+        }
     }
 
     render() {

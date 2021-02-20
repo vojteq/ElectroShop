@@ -1,33 +1,69 @@
 .row-header{
-    margin:0px auto;
-    padding:0px auto;
+  margin: 0px auto;
+  padding: 0px auto;
 }
 
 .row-content {
-    margin:0px auto;
-    padding: 50px 0px 50px 0px;
-    border-bottom: 1px ridge;
-    min-height:400px;
+  margin:0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height:400px;
 }
 
 .footer{
-    background-color: #D1C4E9;
-    margin:0px auto;
-    padding: 20px 0px 20px 0px;
+  background-color: #5068a9;
+  margin:0px auto;
+  padding: 20px 0px 20px 0px;
 }
 .jumbotron {
-    padding:70px 30px 70px 30px;
-    margin:0px auto;
-    background: #9575CD ;
-    color:floralwhite;
+  padding:70px 30px 70px 30px;
+  margin:0px auto;
+  /*background:#86a6df !important;*/
+  background:#7996c9 !important;
+  color:floralwhite;
 }
 
 address{
-    font-size:80%;
-    margin:0px;
-    color:#0f0f0f;
+  font-size:80%;
+  margin:0px;
+  /*color:#0f0f0f;*/
 }
 
 .navbar-dark {
-    background-color: #512DA8;
+  background-color:#5068a9;
 }
+
+body {
+  background-color: #324e7b !important;
+  color: #ffffff;
+}
+
+.footer {
+  color: white;
+}
+
+.white-font {
+  color: #ffffff;
+}
+
+a.my-link:link, a.my-link:visited, a.my-link:hover, a.my-link:active {
+  text-decoration: underline;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.footer-icon {
+  color: #ffffff !important;
+}
+
+.navbar-brand {
+  margin: 0;
+  padding: 0;
+}
+
+/*.kolorki {*/
+/*  background-color: #f8f8f8;*/
+/*  background-color: #5068a9;*/
+/*  background-color: #86a6df;*/
+/*  background-color: #86a6df;*/
+/*}*/

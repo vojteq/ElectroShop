@@ -1,18 +1,25 @@
-import {initialState, Reducer} from "./reducer";
-import {combineReducers, createStore} from 'redux'
-import {Products} from "./products";
-import {Comments} from "./comments";
-import {Promotions} from "./promotions";
-import {Leaders} from "./leaders";
+import {applyMiddleware, combineReducers, createStore} from "redux"
+import {ProductsReducer} from "./products";
+import {CommentsReducer} from "./comments";
+import {LeadersReducer} from "./leaders";
+import thunk from "redux-thunk"
+import logger from "redux-logger"
+import {createForms} from "react-redux-form";
+import {InitialFeedback} from "./forms";
+import {PromotionsReducer} from "./promotions";
 
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
-            products: Products,
-            comments: Comments,
-            promotions: Promotions,
-            leaders: Leaders
-        })
+            products: ProductsReducer,
+            comments: CommentsReducer,
+            promotions: PromotionsReducer,
+            leaders: LeadersReducer,
+            ...createForms({
+                feedback: InitialFeedback
+            })
+        }),
+        applyMiddleware(thunk, logger)
     );
 
     return store;
