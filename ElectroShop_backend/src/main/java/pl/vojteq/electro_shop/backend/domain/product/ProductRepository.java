@@ -14,5 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 //
 //    List<Product> findBySubcategoryNameOrderByName(Subcategory subcategory);
 
-    void deleteById(UUID uuid);
+    void deleteById(UUID id);
 }

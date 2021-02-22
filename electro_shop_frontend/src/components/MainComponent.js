@@ -40,13 +40,16 @@ class Main extends Component {
         const HomePage = () => {
             return (
                 <Home
-                    product={this.props.products.products.filter((product) => product.featured)[0]}
+                    product={this.props.products.products[0]}
                     productsLoading={this.props.products.isLoading}
                     productsErrMess={this.props.products.errMess}
 
-                    promotion={this.props.promotions.promotions.filter((promotion) => promotion.featured)[0]}
-                    promotionsLoading={this.props.promotions.isLoading}
-                    promotionsErrMess={this.props.promotions.errMess}
+                    // promotion={this.props.promotions.promotions.filter((promotion) => promotion.featured)[0]}
+                    // promotionsLoading={this.props.promotions.isLoading}
+                    // promotionsErrMess={this.props.promotions.errMess}
+                    promotion={this.props.products.products[1]}
+                    promotionsLoading={this.props.products.isLoading}
+                    promotionsErrMess={this.props.products.errMess}
 
                     leader={this.props.leaders.filter((leader) => leader.featured)[0]}
                 />
@@ -54,17 +57,17 @@ class Main extends Component {
         }
 
         const ProductWithId = ({match}) => {
+            // let product = this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0];
+            let product = this.props.products.products.filter((product) => product.id === match.params.productId)[0];
             return (
                 <ProductDetails
-                    product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
+                    product={product}
                     isLoading={this.props.products.isLoading}
                     errMess={this.props.products.errMess}
-                    comments={this.props.comments.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))}
-                    commentsErrMess={this.props.comments.errMess}
                     postComment={this.props.postComment}
                 />
             );
-        }
+        };
 
         return (
             <div>

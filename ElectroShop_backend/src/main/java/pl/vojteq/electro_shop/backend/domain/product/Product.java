@@ -2,11 +2,15 @@ package pl.vojteq.electro_shop.backend.domain.product;
 
 import lombok.*;
 import org.hibernate.type.BlobType;
+import org.springframework.context.annotation.Lazy;
 import pl.vojteq.electro_shop.backend.domain.category.Category;
 import pl.vojteq.electro_shop.backend.domain.category.Subcategory;
+import pl.vojteq.electro_shop.backend.domain.comment.Comment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -34,6 +38,9 @@ public class Product {
 
     private String description;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Comment> comments = new ArrayList<>();
+
     @Lob
     private byte[] picture;
 
@@ -52,6 +59,10 @@ public class Product {
         this.picture = picture;
     }
 
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,7 +76,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, subcategory, description);
+        return Objects.hash(id, name, subcategory, description, comments);
     }
 
     @Override
@@ -73,8 +84,10 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", category=" + category +
                 ", subcategory=" + subcategory +
                 ", description='" + description + '\'' +
+                ", comments=" + comments +
                 '}';
     }
 }

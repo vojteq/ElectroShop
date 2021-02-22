@@ -18,11 +18,9 @@ function RenderProduct({product}) {
         <Card>
             <Link to={`/products/${product.id}`}>
                 <CardImg width="100%" src={baseUrl + product.image} alt={product.name}/>
-                <CardImgOverlay>
-                    <CardTitle>
-                        {product.name}
-                    </CardTitle>
-                </CardImgOverlay>
+                <CardTitle>
+                    {product.name}
+                </CardTitle>
             </Link>
         </Card>
     );
@@ -43,16 +41,14 @@ const Products = (props) => {
             return (
                 <Loading/>
             );
-        }
-        else if (props.products.errMess) {
+        } else if (props.products.errMess) {
             return (
                 <h4>{props.products.errMess}</h4>
             );
-        }
-        else {
+        } else {
             return (
                 <>
-                {renderProducts}
+                    {renderProducts}
                 </>
             );
         }

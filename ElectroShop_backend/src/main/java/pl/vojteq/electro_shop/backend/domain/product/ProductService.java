@@ -19,8 +19,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> findById(UUID uuid) {
-        return productRepository.findById(uuid);
+    public Optional<Product> findById(UUID id) {
+        return productRepository.findById(id);
     }
 
     public List<Product> findBySubcategory(Subcategory subcategory) {
@@ -39,7 +39,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void removeProduct(UUID uuid) {
-        productRepository.deleteById(uuid);
+    public void removeProduct(UUID id) {
+        productRepository.deleteById(id);
     }
 }

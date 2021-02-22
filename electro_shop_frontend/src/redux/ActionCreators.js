@@ -38,13 +38,13 @@ export const addComment = (comment) => ({
 export const postComment = (productId, rating, author, comment) => (dispatch) => {
     const newComment = {
         productId: productId,
-        rating: rating,
         author: author,
+        rating: rating,
         comment: comment
     }
     newComment.date = new Date().toISOString();
 
-    return fetch(baseUrl + "comments", {
+    return fetch(baseUrl + "products/" + productId + "/addComment", {
         method: "POST",
         body: JSON.stringify(newComment),
         headers: {

@@ -247,7 +247,7 @@ const ProductDetails = (props) => {
                             postComment={props.postComment}
                         />
                         <RenderComments
-                            comments={props.comments}
+                            comments={product.comments}
                             postComment={props.postComment}
                             productId={props.product.id}
                         />

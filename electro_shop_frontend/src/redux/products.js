@@ -14,7 +14,7 @@ export const ProductsReducer = (
                 ...state,
                 isLoading: false,
                 errMess: null,
-                products: action.payload
+                products: action.payload._embedded.productList
             };
 
         case ActionTypes.PRODUCTS_LOADING:
