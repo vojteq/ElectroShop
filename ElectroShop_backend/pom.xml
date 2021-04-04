@@ -25,6 +25,16 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -44,21 +54,11 @@
             <version>2.0.2</version>
         </dependency>
 
-<!--         https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-<!--            <version>1.4.200</version>-->
-<!--            <scope>test</scope>-->
-<!--            <scope>runtime</scope>-->
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.19</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.hsqldb</groupId>-->
-<!--            <artifactId>hsqldb</artifactId>-->
-<!--            <version>2.4.0</version>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

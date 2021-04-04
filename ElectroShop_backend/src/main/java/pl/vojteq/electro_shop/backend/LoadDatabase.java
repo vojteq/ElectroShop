@@ -39,12 +39,14 @@ public class LoadDatabase {
                         "Wojtek",
                         "An",
                         "v@gmail.com",
+                        "vojteq",
                         new Address("Kraków", "Krakowska", 10)));
                 userService.createOrUpdateUser(new User(
                         "kov",
                         "Jan",
                         "Kowalski",
                         "kov@gmail.com",
+                        "kov",
                         new Address("Warszawa", "Warszwska", 10, 15)));
                 userService.findAll().forEach(user -> logger.info("Preloading user: " + user));
             }

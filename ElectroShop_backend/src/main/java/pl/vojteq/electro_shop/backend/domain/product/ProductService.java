@@ -31,9 +31,9 @@ public class ProductService {
 //        return productRepository.findBySubcategoryNameOrderByName(subcategory);
 //    }
 //
-//    public List<Product> findByCategory(Category category) {
-//        return productRepository.findBySubcategoryWithin(category.getSubcategories());
-//    }
+    public List<Product> findByCategory(Category category) {
+        return productRepository.findByCategory(category);
+    }
 
     public Product createOrUpdateProduct(Product product) {
         return productRepository.save(product);

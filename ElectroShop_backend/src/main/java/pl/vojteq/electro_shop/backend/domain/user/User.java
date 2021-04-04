@@ -33,6 +33,10 @@ public class User {
     @Email
     private String email;
 
+    private String password;
+
+    private String roles = "USER,ADMIN"; //todo
+
 //    @NotNull
 //    private String login;
 //
@@ -43,10 +47,13 @@ public class User {
     @Embedded
     private Address address;
 
+    private boolean active = true;
 
-    public User(String userName, String email) {
+
+    public User(String userName, String email, String password) {
         this.userName = userName;
         this.email = email;
+        this.password = password;
     }
 
 //    public User(@NotNull String userName, String firstName, String lastName, @NotNull String email, Address address) {
@@ -57,19 +64,21 @@ public class User {
 //        this.address = address;
 //    }
 
-    public User(String userName, String firstName, String lastName, String email, Address address) {
+    public User(String userName, String firstName, String lastName, String email, String password, Address address) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.address = address;
     }
 
-    public User(String userName, String firstName, String lastName, String email) {
+    public User(String userName, String firstName, String lastName, String email, String password) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     @Override

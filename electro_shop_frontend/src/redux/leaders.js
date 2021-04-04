@@ -1,6 +1,5 @@
-import {LEADERS} from "../shared/leaders";
 
-export const LeadersReducer = (state = LEADERS, action) => {
+export const LeadersReducer = (state = [], action) => {
     switch (action.type) {
         default:
             return state;

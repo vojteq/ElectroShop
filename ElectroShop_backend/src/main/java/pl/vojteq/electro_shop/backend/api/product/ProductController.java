@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
+import pl.vojteq.electro_shop.backend.common.exception.NotFoundException;
+import pl.vojteq.electro_shop.backend.domain.category.Category;
+import pl.vojteq.electro_shop.backend.domain.category.CategoryService;
 import pl.vojteq.electro_shop.backend.domain.comment.Comment;
 import pl.vojteq.electro_shop.backend.domain.comment.CommentService;
 import pl.vojteq.electro_shop.backend.domain.product.Product;
@@ -26,6 +29,8 @@ public class ProductController {
 
     private final CommentService commentService;
 
+    private final CategoryService categoryService;
+
     @GetMapping("/products")
     CollectionModel<EntityModel<Product>> getAllProducts() {
         List<EntityModel<Product>> products = productService.findAll()
@@ -39,12 +44,27 @@ public class ProductController {
         );
     }
 
-    @GetMapping("/products/{id}")
-    EntityModel<Product> getProduct(@PathVariable UUID id) {
-        Product product = productService.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+    @GetMapping("/products/{productId}")
+    EntityModel<Product> getProduct(@PathVariable UUID productId) {
+        Product product = productService.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
 
         return assembler.toModel(product);
+    }
+
+    @GetMapping("/products/categories/{categoryId}")
+    CollectionModel<EntityModel<Product>> getProductsFromCategory(@PathVariable UUID categoryId) {
+        Category category = categoryService.findById(categoryId)
+                .orElseThrow(() -> new NotFoundException(categoryId, "CATEGORY"));
+        List<EntityModel<Product>> products = productService.findByCategory(category)
+                .stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(
+                products,
+                linkTo(methodOn(ProductController.class).getProductsFromCategory(categoryId)).withSelfRel()
+        );
     }
 
     @PostMapping("/products")
@@ -52,9 +72,9 @@ public class ProductController {
         return productService.createOrUpdateProduct(product);
     }
 
-    @PostMapping("/products/{id}")
-    Product updateProduct(@RequestBody Product newProduct, @PathVariable UUID id) {
-        return productService.findById(id)
+    @PostMapping("/products/{productId}")
+    Product updateProduct(@RequestBody Product newProduct, @PathVariable UUID productId) {
+        return productService.findById(productId)
                 .map(product -> {
                     product.setName(newProduct.getName());
                     product.setCategory(newProduct.getCategory());
@@ -64,7 +84,7 @@ public class ProductController {
                     return productService.createOrUpdateProduct(product);
                 })
                 .orElseGet(() -> {
-                    newProduct.setId(id);
+                    newProduct.setId(productId);
                     return productService.createOrUpdateProduct(newProduct);
                 });
     }
