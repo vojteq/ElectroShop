@@ -5,7 +5,6 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ public class User {
     private UUID id;
 
 //    @NotNull
-    private String userName;
+    private String username;
 
     private String firstName;
 
@@ -50,8 +49,8 @@ public class User {
     private boolean active = true;
 
 
-    public User(String userName, String email, String password) {
-        this.userName = userName;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -64,8 +63,8 @@ public class User {
 //        this.address = address;
 //    }
 
-    public User(String userName, String firstName, String lastName, String email, String password, Address address) {
-        this.userName = userName;
+    public User(String username, String firstName, String lastName, String email, String password, Address address) {
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -73,8 +72,8 @@ public class User {
         this.address = address;
     }
 
-    public User(String userName, String firstName, String lastName, String email, String password) {
-        this.userName = userName;
+    public User(String username, String firstName, String lastName, String email, String password) {
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -87,7 +86,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return Objects.equals(id, user.id) &&
-                userName.equals(user.userName) &&
+                username.equals(user.username) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 email.equals(user.email) &&
@@ -96,14 +95,14 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, firstName, lastName, email, address);
+        return Objects.hash(id, username, firstName, lastName, email, address);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

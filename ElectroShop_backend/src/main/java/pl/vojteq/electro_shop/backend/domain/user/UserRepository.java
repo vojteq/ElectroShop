@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     List<User> findByAddress_City(String city);
 
-    Optional<User> getUserByUserName(String userName);
+    Optional<User> getUserByUsername(String userName);
 
     void deleteById(UUID id);
 }

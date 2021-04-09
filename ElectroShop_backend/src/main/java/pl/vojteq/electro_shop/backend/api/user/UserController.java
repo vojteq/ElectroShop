@@ -53,7 +53,7 @@ public class UserController {
     User updateUser(@RequestBody User newUser, @PathVariable UUID id) {
         return service.findById(id)
                 .map(user -> {
-                    user.setUserName(newUser.getUserName());
+                    user.setUsername(newUser.getUsername());
                     user.setFirstName(newUser.getFirstName());
                     user.setLastName(newUser.getLastName());
                     user.setEmail(newUser.getEmail());
